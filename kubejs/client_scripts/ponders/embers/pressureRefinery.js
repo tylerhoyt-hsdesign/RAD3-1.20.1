@@ -38,7 +38,7 @@ Ponder.registry((e) => {
 
         scene.idle(40);
 
-        scene.text(100, "And at maximum, x4. See JEI for the list of multiplier blocks.")
+        scene.text(100, "And at maximum, x4. See EMI for the list of multiplier blocks.")
         
         scene.idle(40);
 

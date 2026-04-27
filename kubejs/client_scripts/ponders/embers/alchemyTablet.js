@@ -149,7 +149,7 @@ Ponder.registry((e) => {
 
         scene.addLazyKeyframe();
 
-        scene.text(100, "In JEI you can see the recipe may contain a Copper, Lead, and Silver Aspectus.")
+        scene.text(100, "In EMI you can see the recipe may contain a Copper, Lead, and Silver Aspectus.")
 
         scene.world.removeEntity(apparatus);
 

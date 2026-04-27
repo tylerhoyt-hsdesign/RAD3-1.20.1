@@ -59,7 +59,7 @@ Ponder.registry((e) => {
 
         scene.idle(80);
 
-        scene.text(80, "And at maximum, x6. See JEI for the list of chamber inputs.")
+        scene.text(80, "And at maximum, x6. See EMI for the list of chamber inputs.")
         
         scene.idle(40);
 

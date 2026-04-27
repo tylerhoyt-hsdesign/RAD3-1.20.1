@@ -179,7 +179,7 @@ Ponder.registry((e) => {
             nbt.FluidName = 'embers:molten_copper'
             nbt.Amount = 1000
         });
-        scene.text(100, "Each type of ore gives a different output. See JEI for the specifics.", [2, 1, 1])
+        scene.text(100, "Each type of ore gives a different output. See EMI for the specifics.", [2, 1, 1])
         
         scene.idle(120);
     });

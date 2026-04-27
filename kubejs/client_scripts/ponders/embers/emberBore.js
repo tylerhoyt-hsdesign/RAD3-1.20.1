@@ -49,7 +49,7 @@ Ponder.registry((e) => {
 
         scene.idle(100);
 
-        scene.text(80, "Other recipes may have different requirements, so check JEI for info.")
+        scene.text(80, "Other recipes may have different requirements, so check EMI for info.")
 
         scene.idle(100);
 
