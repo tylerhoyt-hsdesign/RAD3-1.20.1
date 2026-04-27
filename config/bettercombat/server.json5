@@ -21,7 +21,7 @@
 		"alexsmobs:crocodile"
 	],
 	// Allows vanilla sweeping mechanic to work and Sweeping Edge enchantment
-	"allow_vanilla_sweeping": true,
+	"allow_vanilla_sweeping": false,
 	// Allows new sweeping mechanic (by Better Combat) to work, including Sweeping Edge enchantment
 	"allow_reworked_sweeping": true,
 	/* The more additional targets a weapon swing hits, the weaker it will get.
