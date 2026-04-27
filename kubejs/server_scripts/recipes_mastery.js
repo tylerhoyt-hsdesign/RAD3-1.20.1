@@ -18,9 +18,7 @@ ServerEvents.recipes((event) => {
     ['kubejs:spawnercore',                       2, 'kubejs:dust_experience'],
     ['shieldinghealth:power_token',              5, 'kubejs:dust_experience'],
     ['celestial_core:sakura_fragment',           1, 'kubejs:dust_experience'],
-    ['simplehats:hatbag_common',                 1, 'kubejs:dust_experience'],
-    ['simplehats:hatbag_uncommon',               2, 'kubejs:dust_experience'],
-    ['simplehats:hatbag_rare',                   3, 'kubejs:dust_experience'],
+
     ['collectorsalbum:common_card_pack',         1, 'kubejs:dust_experience'],
     ['collectorsalbum:uncommon_card_pack',        2, 'kubejs:dust_experience'],
     ['collectorsalbum:rare_card_pack',           3, 'kubejs:dust_experience'],
@@ -55,9 +53,7 @@ ServerEvents.recipes((event) => {
     ['minecraft:music_disc_13',            3, 'kubejs:scraps'],
     ['minecraft:music_disc_cat',           3, 'kubejs:scraps'],
     ['paraglider:spirit_orb',              3, 'kubejs:scraps'],
-    ['simplehats:hatbag_common',           1, 'kubejs:scraps'],
-    ['simplehats:hatbag_uncommon',         2, 'kubejs:scraps'],
-    ['simplehats:hatbag_rare',             3, 'kubejs:scraps'],
+
     ['collectorsalbum:common_card_pack',   1, 'kubejs:scraps'],
     ['collectorsalbum:uncommon_card_pack', 2, 'kubejs:scraps'],
     ['collectorsalbum:rare_card_pack',     3, 'kubejs:scraps'],
