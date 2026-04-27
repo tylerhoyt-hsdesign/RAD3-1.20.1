@@ -8,7 +8,7 @@
     "y_offset": 0
   },
   "custom_experience_number": {
-    "enable": true,
+    "enable": false,
     "xp_color": 65280,
     "xp_outline_color": 0
   },
