@@ -1,5 +1,30 @@
 # RAD3 1.20.1 — Full Code Review Issue List
 
+---
+
+## Active Fix Plan
+
+### COL-C1 — BetterCombat dual sweep ✅ DONE
+**Status:** Already resolved — `config\bettercombat\server.json5` already has `"allow_vanilla_sweeping": false`. No change needed.
+
+### COL-H14 — JEI removed; clean up JEI KubeJS scripts ✅ DONE
+JEI has been removed from the modpack profile. **Completed in branch `fix/col-h14-remove-jei-scripts`.**
+
+**1. Delete `jei-descriptions.js`** — migrate 10 `JEIEvents.information` item descriptions to `ItemEvents.tooltip` in a new `kubejs\client_scripts\tooltips\item-info.js` file. Tooltips work with any recipe viewer (EMI, REI, vanilla F3+H).
+
+**2. Delete `jei-remove-cat.js`** — creates a new `kubejs\client_scripts\emi-pending.js-` file (disabled by default) that documents the uncrafting table category removal, explaining what needs to be done if an EMI-KubeJS bridge is added in future.
+
+**3. Delete `script.js` JEI blocks** — `JEIEvents.hideItems` (~120 items) and `JEIEvents.addItems` (2 items) are dead code without JEI. Create `kubejs\client_scripts\emi-hide-pending.js-` listing all items to be hidden from EMI, disabled until an EMI bridge is added. Strip the dead JEI event blocks from `script.js`.
+
+**4. Update ponder text strings** — 5 ponder scripts reference "JEI" in user-visible text; update to "EMI":
+   - `kubejs\client_scripts\ponders\embers\alchemyTablet.js` line 152
+   - `kubejs\client_scripts\ponders\embers\ignemReactor.js` line 62
+   - `kubejs\client_scripts\ponders\embers\melter.js` line 182
+   - `kubejs\client_scripts\ponders\embers\emberBore.js` line 52
+   - `kubejs\client_scripts\ponders\embers\pressureRefinery.js` line 41
+
+---
+
 Acting as a senior game designer and software developer, this is a comprehensive review of all KubeJS scripts in the repository. Each issue is assigned a unique ID and can be selected for a fix in the next step.
 
 ---
@@ -832,30 +857,30 @@ double-modify the same mechanic, or produce unintended interactions.
 
 ---
 
-### COL-C1 · BetterCombat — Both vanilla AND reworked sweep active simultaneously
+### COL-C1 · BetterCombat — Both vanilla AND reworked sweep active simultaneously ✅ DONE
 - **File:** `config\bettercombat\server.json5` lines 24 & 26
 - **Conflict:** `allow_vanilla_sweeping: true` + `allow_reworked_sweeping: true` — both fire independently on each sweep swing. Double AoE damage per attack. BetterCombat's own config warns to choose one.
 - **Fix:** Set `"allow_vanilla_sweeping": false`
+- **Resolution:** Config was already correct — `allow_vanilla_sweeping` was already `false`. No change needed.
 
 ---
 
-### COL-C2 · ShieldMechanics + ShieldOverhaul — Two full shield system overhauls with no compat
+### ~~COL-C2~~ · ~~ShieldMechanics + ShieldOverhaul — Two full shield system overhauls with no compat~~ — ✅ DISMISSED (false positive)
 - **Files:** `config\shieldmechanics.json`; `config\shield_overhaul\shield_overhaul.json`
-- **Conflict:** ShieldMechanics (65% reduction, 100% block cap, 15% passive hold reduction) + ShieldOverhaul (instant shield use, parry window, shield bash) both hook `LivingHurtEvent` with no declared compatibility. Combined with parry stun and 100% block cap, shields may become completely overpowered.
-- **Fix:** Decide on one system, or test in-game and document the intended combined behavior
+- **Assessment:** These are complementary mods, not duplicates. ShieldMechanics controls *per-shield damage reduction numbers* (how much % a shield blocks/passively reduces). ShieldOverhaul controls *new actions* (parry window, bash, instant raise). Their config schemas are entirely different and there is no functional overlap. Intended to work together.
 
 ---
 
-### COL-C3 · KubeJS gamerules.js + Iron's RPG Tweaks — `naturalRegeneration false` kills live regen attributes
+### ~~COL-C3~~ · ~~KubeJS gamerules.js + Iron's RPG Tweaks — `naturalRegeneration false` kills live regen attributes~~ — ✅ DISMISSED (false positive)
 - **Files:** `kubejs\server_scripts\gamerules.js`; `config\attributefix.json`
-- **Conflict:** `naturalRegeneration false` permanently disabled. Iron's RPG Tweaks registers `irons_rpg_tweaks:natural_regen_speed` and `natural_regen_amount` as live player attributes. Items that grant regen bonuses are silently broken.
-- **Fix:** Either re-enable natural regen and let Iron's RPG Tweaks manage it, or remove the dead attribute entries from `attributefix.json`
+- **Assessment:** `naturalRegeneration false` only disables the vanilla passive tick regen — it does not affect food-saturation regen, healing potions/items, or Iron's RPG Tweaks attribute-granted regen. Additionally, both `irons_rpg_tweaks:natural_regen_speed` and `irons_rpg_tweaks:natural_regen_amount` entries in `attributefix.json` are `"enabled": false`, meaning AttributeFix is not managing them; they run at their mod defaults. No conflict exists.
 
 ---
 
-### COL-C22 · YUNG's Better Strongholds + Dungeons & Taverns Stronghold Rework — registry collision
-- **Mechanic:** Both mods replace `minecraft:strongholds`. Only one can exist; the other's content silently disappears or causes a registry error on world load.
-- **Fix:** Disable one (recommend keeping D&T Stronghold Rework)
+### ~~COL-C22~~ · ~~YUNG's Better Strongholds + Dungeons & Taverns Stronghold Rework — registry collision~~ — ✅ DISMISSED (false positive, files removed)
+- **Assessment:** YUNG's Better Strongholds is not in the modpack profile. D&T Stronghold Rework is the only active stronghold replacer. Two orphaned files have been deleted in branch `chore/col-c22-remove-orphaned-stronghold-files`:
+  - `config/betterstrongholds-forge-1_20.toml` (config for absent mod)
+  - `config/paxi/datapacks/rad3-structures/data/artifacts/loot_tables/inject/chests/stronghold_corridor.json` (empty `{}` loot injection; target replaced by D&T)
 
 ---
 
@@ -894,9 +919,10 @@ double-modify the same mechanic, or produce unintended interactions.
 
 ---
 
-### COL-H14 · JEI + EMI both fully active — duplicate sidebars and R/U keybind conflict
+### COL-H14 · JEI + EMI both fully active — duplicate sidebars and R/U keybind conflict ✅ DONE
 - **Config:** `emi.css: enabled=true`; `jei-client.ini` has active non-default settings. Both bind `R` and `U`. Ars Nouveau recipe categories duplicated.
 - **Fix:** Disable one viewer (recommend keeping EMI)
+- **Resolution:** JEI removed from modpack. KubeJS JEI scripts deleted and migrated — see branch `fix/col-h14-remove-jei-scripts`.
 
 ---
 
@@ -991,7 +1017,7 @@ double-modify the same mechanic, or produce unintended interactions.
 | COL-L35 | Dungeons Enhanced druid_circle frequency=0 — never generates |
 | COL-L36 | Valhelsia deep_spawner_rooms empty structure list spacing=4 |
 | COL-L45 | red_exp redundant with XP Tome and Tombstone Scrolls |
-| COL-L46 | 5+ simultaneous HUD mods — screen clutter |
+| ~~COL-L46~~ | ~~5+ simultaneous HUD mods — screen clutter~~ | ✅ Done — FancyHotbar XP number disabled; AppleSkin health overlay disabled; OverflowingBars owns XP+health rendering |
 | COL-L47 | Bountiful + FTB Quests overlapping reward objectives |
 
 ---
@@ -1000,16 +1026,16 @@ double-modify the same mechanic, or produce unintended interactions.
 
 | ID | Mods | System | Severity |
 |---|---|---|---|
-| COL-C1 | BetterCombat | Dual sweep damage per swing | 🔴 Critical |
-| COL-C2 | ShieldMechanics × ShieldOverhaul | Undefined combined shield system | 🔴 Critical |
-| COL-C3 | KubeJS × Iron's RPG Tweaks | naturalRegeneration=false kills regen attributes | 🔴 Critical |
-| COL-C22 | YUNG Strongholds × D&T Stronghold Rework | minecraft:strongholds registry collision | 🔴 Critical |
+| ~~COL-C1~~ | ~~BetterCombat~~ | ~~Dual sweep damage per swing~~ | ✅ Done |
+| ~~COL-C2~~ | ~~ShieldMechanics × ShieldOverhaul~~ | ~~Undefined combined shield system~~ | ✅ Dismissed — complementary mods (numbers vs mechanics) |
+| ~~COL-C3~~ | ~~KubeJS × Iron's RPG Tweaks~~ | ~~naturalRegeneration=false kills regen attributes~~ | ✅ Dismissed — gamerule only stops passive tick regen; food/item/attribute regen unaffected; AttributeFix entries are disabled |
+| ~~COL-C22~~ | ~~YUNG Strongholds × D&T Stronghold Rework~~ | ~~minecraft:strongholds registry collision~~ | ✅ Dismissed — YUNG's Strongholds not in pack; orphaned files removed |
 | COL-C23 | ATI × DungeonCrawl × YUNG × DE | Underground physical overlaps | 🔴 Critical |
 | COL-C37 | Tombstone × LevelHearts × PassiveSkillTree | Triple compounding death penalty | 🔴 Critical |
 | COL-H4 | CombatRoll × Iron's RPG Tweaks | Roll i-frames stripped | 🟠 High |
 | COL-H5 | LevelHearts × Paraglider × Aether | Max health ceiling unenforced | 🟠 High |
 | COL-H6 | LevelHearts × SecondChance | Hardcore reset vs death prevention event order | 🟠 High |
-| COL-H14 | JEI × EMI | Both active — keybind conflict + duplicate categories | 🟠 High |
+| ~~COL-H14~~ | ~~JEI × EMI~~ | ~~Both active — keybind conflict + duplicate categories~~ | ✅ Done |
 | COL-H15 | TooManyGlyphs × Ars Nouveau | 16 amplify augments per spell | 🟠 High |
 | COL-H24 | YUNG Fortresses × Incendium | Fortress gaps in Nether | 🟠 High |
 | COL-H25 | DimStructRestrict | 4 dimensions unprotected | 🟠 High |

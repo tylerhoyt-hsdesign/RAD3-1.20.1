@@ -22,7 +22,7 @@ toggleSprint:false
 darkMojangStudiosBackground:false
 hideLightningFlashes:false
 mouseSensitivity:0.5
-fov:0.0
+fov:0.0575
 screenEffectScale:1.0
 fovEffectScale:1.0
 darknessEffectScale:1.0
@@ -34,9 +34,9 @@ gamma:1.0
 renderDistance:16
 simulationDistance:16
 entityDistanceScaling:1.0
-guiScale:2
+guiScale:0
 particles:1
-maxFps:120
+maxFps:200
 graphicsMode:1
 ao:true
 prioritizeChunkUpdates:0
