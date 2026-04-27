@@ -1,0 +1,19 @@
+// emi-pending.js-
+// THIS FILE IS DISABLED (*.js- suffix prevents KubeJS from loading it)
+//
+// EMI RECIPE CATEGORY REMOVALS — pending EMI bridge support
+//
+// The following recipe categories were previously hidden from JEI.
+// They will remain visible in EMI until a KubeJS-EMI bridge mod is added,
+// or until manually handled via an EMI plugin.
+//
+// To re-enable: rename this file to emi-pending.js and implement
+// the equivalent EMI event (requires emi-kubejs bridge or similar).
+//
+// --------------------------------------------------------------------
+// Removed category: twilightforest:uncrafting
+//   Reason: Uncrafting table allows reversing crafting recipes, which
+//   bypasses intended progression gating in RAD3.
+//   This was previously removed from JEI via JEIEvents.removeCategories.
+// --------------------------------------------------------------------
+
