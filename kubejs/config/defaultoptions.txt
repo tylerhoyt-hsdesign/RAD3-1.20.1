@@ -255,7 +255,7 @@ key_key.ars_nouveau.qc10:key.keyboard.0:CONTROL
 key_key.ars_nouveau.familiar_toggle:key.keyboard.unknown
 key_key.aether.open_accessories.desc:key.keyboard.unknown
 key_key.aether.gravitite_jump_ability.desc:key.keyboard.space
-key_key.aether.invisibility_toggle.desc:key.keyboard.v
+key_key.aether.invisibility_toggle.desc:key.keyboard.unknown
 key_key.deep_aether.stratus_dash_ability.desc:key.keyboard.unknown
 key_key.deep_aether.slider_eye_ability:key.keyboard.left.alt
 key_gui.xaero_open_map:key.keyboard.m
