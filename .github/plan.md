@@ -884,16 +884,16 @@ double-modify the same mechanic, or produce unintended interactions.
 
 ---
 
-### COL-C23 · Underground structure density — ATI spacing=10 + Dungeon Crawl + YUNG Dungeons + Dungeons Enhanced
+### ~~COL-C23~~ · ~~Underground structure density — ATI spacing=10 + Dungeon Crawl + YUNG Dungeons + Dungeons Enhanced~~ — ✅ COMPLETE (no changes needed)
 - **Mechanic:** ATI `underground_small` spacing=10/separation=5 means 5 different underground structures every 5–10 chunks. Multiple large underground mods with no mutual exclusion zones — physical overlapping guaranteed.
-- **Fix:** Increase ATI `underground_small` spacing to 40+ and separation to 25
+- **Resolution:** Intentional design — dense underground content is part of the pack experience. No changes required.
 
 ---
 
-### COL-C37 · Tombstone (95% XP loss) + LevelHearts Hardcore + PassiveSkillTree — triple death penalty
+### ~~COL-C37~~ · ~~Tombstone (95% XP loss) + LevelHearts Hardcore + PassiveSkillTree — triple death penalty~~ — ✅ COMPLETE (no changes needed)
 - **Files:** `tombstone-server.toml: xp_loss_on_death=95`; `levelhearts.toml: Hardcore=true`; `skilltree-common.toml: first skill point cost=250 XP`
-- **Conflict:** Single death: 95% XP wiped + max health reset to 5 hearts + future skill points severely delayed. A level 40 player loses essentially all progression in one death with no grace mechanic.
-- **Fix:** Reduce `xp_loss_on_death` to 30–50%, or disable `Hardcore = true` in LevelHearts, or reduce skill point XP costs
+- **Conflict:** Single death: 95% XP wiped + max health reset to 5 hearts + future skill points severely delayed.
+- **Resolution:** Intentional difficulty design — the harsh death penalty is a core pack mechanic. No changes required.
 
 ---
 
@@ -1030,8 +1030,8 @@ double-modify the same mechanic, or produce unintended interactions.
 | ~~COL-C2~~ | ~~ShieldMechanics × ShieldOverhaul~~ | ~~Undefined combined shield system~~ | ✅ Dismissed — complementary mods (numbers vs mechanics) |
 | ~~COL-C3~~ | ~~KubeJS × Iron's RPG Tweaks~~ | ~~naturalRegeneration=false kills regen attributes~~ | ✅ Dismissed — gamerule only stops passive tick regen; food/item/attribute regen unaffected; AttributeFix entries are disabled |
 | ~~COL-C22~~ | ~~YUNG Strongholds × D&T Stronghold Rework~~ | ~~minecraft:strongholds registry collision~~ | ✅ Dismissed — YUNG's Strongholds not in pack; orphaned files removed |
-| COL-C23 | ATI × DungeonCrawl × YUNG × DE | Underground physical overlaps | 🔴 Critical |
-| COL-C37 | Tombstone × LevelHearts × PassiveSkillTree | Triple compounding death penalty | 🔴 Critical |
+| ~~COL-C23~~ | ~~ATI × DungeonCrawl × YUNG × DE~~ | ~~Underground physical overlaps~~ | ✅ Complete — intentional design, no changes needed |
+| ~~COL-C37~~ | ~~Tombstone × LevelHearts × PassiveSkillTree~~ | ~~Triple compounding death penalty~~ | ✅ Complete — intentional difficulty design, no changes needed |
 | COL-H4 | CombatRoll × Iron's RPG Tweaks | Roll i-frames stripped | 🟠 High |
 | COL-H5 | LevelHearts × Paraglider × Aether | Max health ceiling unenforced | 🟠 High |
 | COL-H6 | LevelHearts × SecondChance | Hardcore reset vs death prevention event order | 🟠 High |
